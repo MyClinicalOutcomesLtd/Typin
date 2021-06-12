@@ -38,7 +38,7 @@
             exitCode.Should().Be(ExitCodes.Success);
             stdErr.GetString().Should().BeNullOrWhiteSpace();
 
-            commandInstance.Should().BeEquivalentTo(new WithStringArrayOptionCommand
+            commandInstance.Should().BeEquivalentTo(new WithStringArrayOptionCommand(default!)
             {
                 Opt = new[] { "foo", "bar", "baz" }
             });
@@ -145,7 +145,7 @@
             exitCode.Should().Be(ExitCodes.Success);
             stdErr.GetString().Should().BeNullOrWhiteSpace();
 
-            commandInstance.Should().BeEquivalentTo(new WithParametersCommand
+            commandInstance.Should().BeEquivalentTo(new WithParametersCommand(default!)
             {
                 ParamA = "foo",
                 ParamB = number,
@@ -173,7 +173,7 @@
 
             stdErr.GetString().Should().BeNullOrWhiteSpace();
 
-            commandInstance.Should().BeEquivalentTo(new WithParametersCommand
+            commandInstance.Should().BeEquivalentTo(new WithParametersCommand(default!)
             {
                 ParamA = "-",
                 ParamB = 0,

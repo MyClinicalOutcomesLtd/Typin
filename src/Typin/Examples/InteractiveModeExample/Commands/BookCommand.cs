@@ -1,6 +1,7 @@
 ﻿namespace InteractiveModeExample.Commands
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using InteractiveModeExample.Internal;
     using InteractiveModeExample.Services;
@@ -11,14 +12,16 @@
     [Command("book", Description = "List all books in the library.")]
     public class BookCommand : ICommand
     {
+        private readonly IConsole _console;
         private readonly LibraryService _libraryService;
 
-        public BookCommand(LibraryService libraryService)
+        public BookCommand(IConsole console, LibraryService libraryService)
         {
+            _console = console;
             _libraryService = libraryService;
         }
 
-        public ValueTask ExecuteAsync(IConsole console)
+        public ValueTask ExecuteAsync(CancellationToken cancellationToken)
         {
             var library = _libraryService.GetLibrary();
 
@@ -28,18 +31,18 @@
                 // Margin
                 if (!isFirst)
                 {
-                    console.Output.WriteLine();
+                    _console.Output.WriteLine();
                 }
 
                 isFirst = false;
 
                 // Render book
-                console.RenderBook(book);
+                _console.RenderBook(book);
             }
 
             if (isFirst)
             {
-                console.Error.WithForegroundColor(ConsoleColor.Red, (error) => error.WriteLine("No books"));
+                _console.Error.WithForegroundColor(ConsoleColor.Red, (error) => error.WriteLine("No books"));
             }
 
             return default;
@@ -49,14 +52,16 @@
     [Command("BOOK", Description = "List all books in the library.")]
     public class Book2Command : ICommand
     {
+        private readonly IConsole _console;
         private readonly LibraryService _libraryService;
 
-        public Book2Command(LibraryService libraryService)
+        public Book2Command(IConsole console, LibraryService libraryService)
         {
+            _console = console;
             _libraryService = libraryService;
         }
 
-        public ValueTask ExecuteAsync(IConsole console)
+        public ValueTask ExecuteAsync(CancellationToken cancellationToken)
         {
             var library = _libraryService.GetLibrary();
 
@@ -66,18 +71,18 @@
                 // Margin
                 if (!isFirst)
                 {
-                    console.Output.WriteLine();
+                    _console.Output.WriteLine();
                 }
 
                 isFirst = false;
 
                 // Render book
-                console.RenderBook(book);
+                _console.RenderBook(book);
             }
 
             if (isFirst)
             {
-                console.Error.WithForegroundColor(ConsoleColor.Red, (error) => error.WriteLine("No BOOKS"));
+                _console.Error.WithForegroundColor(ConsoleColor.Red, (error) => error.WriteLine("No BOOKS"));
             }
 
             return default;

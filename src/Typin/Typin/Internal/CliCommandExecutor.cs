@@ -29,17 +29,19 @@
         }
 
         /// <inheritdoc/>
-        public async Task<int> ExecuteCommandAsync(string commandLine)
+        public async Task<int> ExecuteCommandAsync(string commandLine, CancellationToken cancellationToken = default)
         {
             IEnumerable<string> commandLineArguments = CommandLineSplitter.Split(commandLine);
 
-            return await ExecuteCommandAsync(commandLineArguments);
+            return await ExecuteCommandAsync(commandLineArguments, cancellationToken);
         }
 
         /// <inheritdoc/>
-        public async Task<int> ExecuteCommandAsync(IEnumerable<string> commandLineArguments)
+        public async Task<int> ExecuteCommandAsync(IEnumerable<string> commandLineArguments, CancellationToken cancellationToken = default)
         {
             _logger.LogInformation("Executing command '{CommandLineArguments}'.", commandLineArguments);
+
+            //TODO: pass cancellationToken deeper
 
             using (IServiceScope serviceScope = _serviceScopeFactory.CreateScope())
             {

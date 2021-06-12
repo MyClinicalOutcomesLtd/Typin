@@ -3,12 +3,14 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
+    using Typin;
     using Typin.AutoCompletion;
     using Typin.Console;
-    using Typin.Utilities;
+    using Typin.Input;
 
     /// <summary>
     /// Interactive CLI mode.
@@ -19,9 +21,10 @@
 
         private readonly InteractiveModeOptions _options;
         private readonly IConsole _console;
-        private readonly ApplicationMetadata _metadata;
         private readonly ApplicationConfiguration _configuration;
         private readonly ILogger _logger;
+        private readonly IStartupInputProvider _startupInputProvider;
+        private readonly IInteractiveInputProvider _interactiveInputProvider;
         private readonly IServiceProvider _serviceProvider;
 
         private readonly AutoCompleteInput? _autoCompleteInput;
@@ -33,41 +36,38 @@
                                IConsole console,
                                ILogger<InteractiveMode> logger,
                                IRootSchemaAccessor rootSchemaAccessor,
-                               ApplicationMetadata metadata,
                                ApplicationConfiguration configuration,
+                               IStartupInputProvider startupInputProvider,
+                               IInteractiveInputProvider interactiveInputProvider,
                                IServiceProvider serviceProvider)
         {
             _options = options.Value;
 
             _console = console;
             _logger = logger;
-            _metadata = metadata;
             _configuration = configuration;
+            _startupInputProvider = startupInputProvider;
+            _interactiveInputProvider = interactiveInputProvider;
             _serviceProvider = serviceProvider;
-
-            if (_options.IsAdvancedInputAvailable && !_console.Input.IsRedirected)
-            {
-                _autoCompleteInput = new AutoCompleteInput(_console, _options.UserDefinedShortcuts)
-                {
-                    AutoCompletionHandler = new AutoCompletionHandler(rootSchemaAccessor),
-                };
-
-                _autoCompleteInput.History.IsEnabled = true;
-            }
         }
 
         /// <inheritdoc/>
-        public async ValueTask<int> ExecuteAsync(IEnumerable<string> commandLineArguments, ICliCommandExecutor executor)
+        public async ValueTask<int> ExecuteAsync(ICliCommandExecutor executor, CancellationToken cancellationToken)
         {
-            if (firstEnter && _configuration.StartupMode == typeof(InteractiveMode) && commandLineArguments.Any())
+            if (firstEnter && _configuration.StartupMode == typeof(InteractiveMode))
             {
-                await executor.ExecuteCommandAsync(commandLineArguments);
+                IEnumerable<string> commandLineArguments = await _startupInputProvider.GetInputAsync(cancellationToken);
+
+                if (commandLineArguments.Any())
+                {
+                    await executor.ExecuteCommandAsync(commandLineArguments, cancellationToken);
+                }
             }
 
             IEnumerable<string> interactiveArguments;
             try
             {
-                interactiveArguments = await GetInputAsync(_metadata.ExecutableName);
+                interactiveArguments = await _interactiveInputProvider.GetInputAsync(cancellationToken);
             }
             catch (TaskCanceledException)
             {
@@ -79,61 +79,11 @@
 
             if (interactiveArguments.Any())
             {
-                await executor.ExecuteCommandAsync(interactiveArguments);
+                await executor.ExecuteCommandAsync(interactiveArguments, cancellationToken);
                 _console.ResetColor();
             }
 
             return ExitCodes.Success;
-        }
-
-        /// <summary>
-        /// Gets user input and returns arguments or null if cancelled.
-        /// </summary>
-        private async Task<IEnumerable<string>> GetInputAsync(string executableName)
-        {
-            IConsole console = _console;
-
-            string scope = _options.Scope;
-            bool hasScope = !string.IsNullOrWhiteSpace(scope);
-
-            // Print prompt
-            _options.Prompt(_serviceProvider, _metadata, _console);
-
-            // Read user input
-            console.ForegroundColor = _options.CommandForeground;
-
-            string? line = string.Empty; // Can be null when Ctrl+C is pressed to close the app.
-            if (_autoCompleteInput is null)
-            {
-                line = await console.Input.ReadLineAsync();
-            }
-            else
-            {
-                line = await _autoCompleteInput.ReadLineAsync(console.GetCancellationToken());
-            }
-
-            console.ForegroundColor = ConsoleColor.Gray;
-
-            IEnumerable<string> arguments = Enumerable.Empty<string>();
-
-            if (!string.IsNullOrWhiteSpace(line))
-            {
-                if (hasScope) // handle scoped command input
-                {
-                    List<string> tmp = CommandLineSplitter.Split(line).ToList();
-
-                    int lastDirective = tmp.FindLastIndex(x => x.StartsWith('[') && x.EndsWith(']'));
-                    tmp.Insert(lastDirective + 1, scope);
-
-                    arguments = tmp.ToArray();
-                }
-                else // handle unscoped command input
-                {
-                    arguments = CommandLineSplitter.Split(line);
-                }
-            }
-
-            return arguments;
         }
     }
 }

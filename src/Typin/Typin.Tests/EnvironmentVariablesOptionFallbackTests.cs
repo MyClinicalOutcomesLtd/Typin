@@ -78,7 +78,7 @@
 
             // Assert
             exitCode.Should().Be(ExitCodes.Success);
-            commandInstance.Should().BeEquivalentTo(new WithEnvironmentVariablesCommand
+            commandInstance.Should().BeEquivalentTo(new WithEnvironmentVariablesCommand(default!)
             {
                 OptA = "correct"
             });
@@ -103,7 +103,7 @@
 
             // Assert
             exitCode.Should().Be(ExitCodes.Success);
-            commandInstance.Should().BeEquivalentTo(new WithEnvironmentVariablesCommand
+            commandInstance.Should().BeEquivalentTo(new WithEnvironmentVariablesCommand(default!)
             {
                 OptB = new[] { "foo", "bar" }
             });
@@ -128,7 +128,7 @@
 
             // Assert
             exitCode.Should().Be(ExitCodes.Success);
-            commandInstance.Should().BeEquivalentTo(new WithEnvironmentVariablesCommand
+            commandInstance.Should().BeEquivalentTo(new WithEnvironmentVariablesCommand(default!)
             {
                 OptA = $"foo{Path.PathSeparator}bar"
             });

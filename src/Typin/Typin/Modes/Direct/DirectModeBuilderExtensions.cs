@@ -1,5 +1,7 @@
 ﻿namespace Typin.Modes
 {
+    using Typin.Hosting.Builder;
+
     /// <summary>
     /// <see cref="CliApplicationBuilder"/> direct mode configuration extensions.
     /// </summary>
@@ -8,12 +10,12 @@
         /// <summary>
         /// Adds a direct mode to the application.
         /// </summary>
-        public static CliApplicationBuilder UseDirectMode(this CliApplicationBuilder builder,
-                                                          bool asStartup = false)
+        public static ICliComponentsCollection AddDirectMode(this ICliComponentsCollection cli,
+                                                             bool asStartup = false)
         {
-            builder.RegisterMode<DirectMode>(asStartup);
+            cli.RegisterMode<DirectMode>(asStartup);
 
-            return builder;
+            return cli;
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace Typin.Tests.Dummy.Commands
 {
+    using System.Threading;
     using System.Threading.Tasks;
     using Typin.Attributes;
     using Typin.Console;
@@ -10,9 +11,16 @@
         [CommandOption("target", FallbackVariableName = "ENV_TARGET")]
         public string Target { get; init; } = "World";
 
-        public ValueTask ExecuteAsync(IConsole console)
+        private readonly IConsole _console;
+
+        public HelloWorldCommand(IConsole console)
         {
-            console.Output.WriteLine($"Hello {Target}!");
+            _console = console;
+        }
+
+        public ValueTask ExecuteAsync(CancellationToken cancellationToken)
+        {
+            _console.Output.WriteLine($"Hello {Target}!");
 
             return default;
         }

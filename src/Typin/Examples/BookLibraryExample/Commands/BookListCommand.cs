@@ -1,6 +1,7 @@
 ﻿namespace BookLibraryExample.Commands
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using BookLibraryExample.Internal;
     using BookLibraryExample.Models;
@@ -12,14 +13,16 @@
     [Command("book list", Description = "List all books in the library.")]
     public class BookListCommand : ICommand
     {
+        private readonly IConsole _console;
         private readonly LibraryService _libraryService;
 
-        public BookListCommand(LibraryService libraryService)
+        public BookListCommand(IConsole console, LibraryService libraryService)
         {
+            _console = console;
             _libraryService = libraryService;
         }
 
-        public ValueTask ExecuteAsync(IConsole console)
+        public ValueTask ExecuteAsync(CancellationToken cancellationToken)
         {
             Library library = _libraryService.GetLibrary();
 
@@ -29,18 +32,18 @@
                 // Margin
                 if (!isFirst)
                 {
-                    console.Output.WriteLine();
+                    _console.Output.WriteLine();
                 }
 
                 isFirst = false;
 
                 // Render book
-                console.RenderBook(book);
+                _console.RenderBook(book);
             }
 
             if (isFirst)
             {
-                console.Output.WithForegroundColor(ConsoleColor.Red, (output) => output.WriteLine("No books"));
+                _console.Output.WithForegroundColor(ConsoleColor.Red, (output) => output.WriteLine("No books"));
             }
 
             return default;

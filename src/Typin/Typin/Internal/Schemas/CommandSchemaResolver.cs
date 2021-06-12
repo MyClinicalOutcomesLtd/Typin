@@ -38,7 +38,6 @@
                 }
             }
 
-
             string? name = attribute.Name;
 
             CommandOptionSchema[] builtInOptions = string.IsNullOrWhiteSpace(name)

@@ -1,5 +1,6 @@
 ﻿namespace Typin.Tests.Data.Commands.Valid
 {
+    using System.Threading;
     using System.Threading.Tasks;
     using Typin;
     using Typin.Attributes;
@@ -13,10 +14,17 @@
         [CommandParameter(0)]
         public string? ParamA { get; init; }
 
-        public ValueTask ExecuteAsync(IConsole console)
+        private readonly IConsole _console;
+
+        public DefaultCommandWithParameter(IConsole console)
         {
-            console.Output.WriteLine(ExpectedOutputText);
-            console.Output.WriteLine(ParamA);
+            _console = console;
+        }
+
+        public ValueTask ExecuteAsync(CancellationToken cancellationToken)
+        {
+            _console.Output.WriteLine(ExpectedOutputText);
+            _console.Output.WriteLine(ParamA);
 
             return default;
         }

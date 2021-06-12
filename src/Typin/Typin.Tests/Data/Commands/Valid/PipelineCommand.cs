@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using Typin.Attributes;
     using Typin.Console;
@@ -19,9 +20,9 @@
             _cliContext = cliContext;
         }
 
-        public ValueTask ExecuteAsync(IConsole console)
+        public ValueTask ExecuteAsync(CancellationToken cancellationToken)
         {
-            DebugPrintPipeline(console, _cliContext.Configuration.MiddlewareTypes);
+            DebugPrintPipeline(_cliContext.Console, _cliContext.Configuration.MiddlewareTypes);
 
             return default;
         }

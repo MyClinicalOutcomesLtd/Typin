@@ -2,6 +2,7 @@
 {
     using System;
     using System.Globalization;
+    using System.Threading;
     using System.Threading.Tasks;
     using Typin;
     using Typin.Attributes;
@@ -16,10 +17,17 @@
         [CommandOption("half-nullable")]
         public Half? NullableValue { get; init; }
 
-        public ValueTask ExecuteAsync(IConsole console)
+        private readonly IConsole _console;
+
+        public HalfCommand(IConsole console)
         {
-            console.Output.WriteLine($"Value:{Value.ToString(CultureInfo.InvariantCulture)}");
-            console.Output.WriteLine($"NullableValue:{(NullableValue.HasValue ? NullableValue.Value.ToString(CultureInfo.InvariantCulture) : "null")}");
+            _console = console;
+        }
+
+        public ValueTask ExecuteAsync(CancellationToken cancellationToken)
+        {
+            _console.Output.WriteLine($"Value:{Value.ToString(CultureInfo.InvariantCulture)}");
+            _console.Output.WriteLine($"NullableValue:{(NullableValue.HasValue ? NullableValue.Value.ToString(CultureInfo.InvariantCulture) : "null")}");
 
             return default;
         }

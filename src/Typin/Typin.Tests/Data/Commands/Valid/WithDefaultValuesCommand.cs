@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using Typin.Attributes;
+    using Typin.Console;
     using Typin.Tests.Data.Commands;
 
     [Command("cmd")]
@@ -43,5 +44,10 @@
 
         [CommandOption("enum")]
         public CustomEnum Enum { get; init; } = CustomEnum.Value2;
+
+        public WithDefaultValuesCommand(IConsole console) : base(console)
+        {
+
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace InteractiveModeExample.Commands
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using Typin;
     using Typin.Attributes;
@@ -21,9 +22,17 @@
         [CommandOption("date", 'd')]
         public DateTime Date { get; init; } = DateTime.Now;
 
-        public ValueTask ExecuteAsync(IConsole console)
+
+        private readonly IConsole _console;
+
+        public TestCommand(IConsole console)
         {
-            console.Output.WriteLine($"'{Author}' '{AuthorX}' '{Ch}'");
+            _console = console;
+        }
+
+        public ValueTask ExecuteAsync(CancellationToken cancellationToken)
+        {
+            _console.Output.WriteLine($"'{Author}' '{AuthorX}' '{Ch}'");
 
             return default;
         }

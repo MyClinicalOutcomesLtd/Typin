@@ -1,6 +1,7 @@
 ﻿namespace InteractiveModeExample.Commands
 {
     using System;
+    using System.Threading;
     using System.Threading.Tasks;
     using InteractiveModeExample.Internal;
     using InteractiveModeExample.Models;
@@ -14,6 +15,7 @@
             Manual = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer euismod nunc lorem, vitae cursus sem facilisis ut. Cras et nibh justo. Mauris eu elit lectus. Suspendisse potenti. Mauris luctus sapien quis arcu semper, vel venenatis elit ultrices. Quisque suscipit arcu vel massa vestibulum dapibus. Maecenas felis lacus, pharetra sed fermentum in, molestie vel ipsum. Nullam elementum arcu eget est tempor, blandit lacinia odio facilisis. Proin nulla odio, sodales et tellus nec, pulvinar ultrices nunc. Integer ornare, odio vel tincidunt congue, diam lorem facilisis lectus, id tempor sapien nibh vitae justo. Mauris ut odio justo. Etiam sed felis tellus. Nam sollicitudin neque in tempor scelerisque. Praesent sit amet nisi quis justo scelerisque placerat.")]
     public class BookAddCommand : ICommand
     {
+        private readonly IConsole _console;
         private readonly LibraryService _libraryService;
 
         [CommandParameter(0, Name = "title", Description = "Book title.")]
@@ -28,12 +30,13 @@
         [CommandOption("isbn", 'n', Description = "Book ISBN.")]
         public Isbn Isbn { get; init; } = CreateRandomIsbn();
 
-        public BookAddCommand(LibraryService libraryService)
+        public BookAddCommand(LibraryService libraryService, IConsole console)
         {
+            _console = console;
             _libraryService = libraryService;
         }
 
-        public ValueTask ExecuteAsync(IConsole console)
+        public ValueTask ExecuteAsync(CancellationToken cancellationToken)
         {
             if (_libraryService.GetBook(Title) is not null)
             {
@@ -43,14 +46,14 @@
             Book book = new(Title, Author, Published, Isbn);
             _libraryService.AddBook(book);
 
-            console.Output.WriteLine("Book added.");
-            console.RenderBook(book);
+            _console.Output.WriteLine("Book added.");
+            _console.RenderBook(book);
 
             return default;
         }
 
         #region Helpers
-        private static readonly Random Random = new Random();
+        private static readonly Random Random = new();
 
         private static DateTimeOffset CreateRandomDate()
         {

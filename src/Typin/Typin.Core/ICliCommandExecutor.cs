@@ -1,6 +1,7 @@
 ﻿namespace Typin
 {
     using System.Collections.Generic;
+    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -12,11 +13,11 @@
         /// <summary>
         /// Executes a command.
         /// </summary>
-        Task<int> ExecuteCommandAsync(IEnumerable<string> commandLineArguments);
+        Task<int> ExecuteCommandAsync(IEnumerable<string> commandLineArguments, CancellationToken cancellationToken = default);
 
         /// <summary>
         /// Executes a command.
         /// </summary>
-        Task<int> ExecuteCommandAsync(string commandLine);
+        Task<int> ExecuteCommandAsync(string commandLine, CancellationToken cancellationToken = default);
     }
 }

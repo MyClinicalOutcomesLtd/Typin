@@ -135,7 +135,7 @@ public static class Program
 [Command]
 public class HelloWorldCommand : ICommand
 {
-    public async ValueTask ExecuteAsync(IConsole console)
+    public async ValueTask ExecuteAsync(CancellationToken cancellationToken)
     {
         await console.Output.WriteLineAsync("Hello world!");
     }

@@ -5,6 +5,7 @@
     using System.Diagnostics.CodeAnalysis;
     using Newtonsoft.Json;
     using Typin.Attributes;
+    using Typin.Console;
     using Typin.Tests.Data.Commands;
     using Typin.Tests.Data.CustomTypes.Initializable;
 
@@ -233,5 +234,10 @@
         [CommandOption("int-nullable-array")]
         public int?[]? IntNullableArray { get; init; }
         #endregion
+
+        public SupportedArgumentTypesCommand(IConsole console) : base(console)
+        {
+
+        }
     }
 }

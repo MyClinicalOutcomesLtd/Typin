@@ -33,6 +33,16 @@
         }
 
         /// <summary>
+        /// Checks whether type is a valid command.
+        /// </summary>
+        public static bool IsDynamicCommandType(Type type)
+        {
+            return type.Implements(typeof(IDynamicCommand)) &&
+                   !type.IsAbstract &&
+                   !type.IsInterface;
+        }
+
+        /// <summary>
         /// Checks whether type is a valid CLI mode.
         /// </summary>
         public static bool IsCliModeType(Type type)
