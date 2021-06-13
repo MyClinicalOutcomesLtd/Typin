@@ -1,4 +1,4 @@
-﻿namespace Typin.Internal.Pipeline
+﻿namespace Typin.Middlewares
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +9,10 @@
     using Typin;
     using Typin.Internal.Extensions;
 
-    internal sealed class ExecuteDirectivesSubpipeline : IMiddleware
+    /// <summary>
+    /// Executes directives subpipeline.
+    /// </summary>
+    public sealed class ExecuteDirectivesSubpipeline : IMiddleware
     {
         private readonly ILogger _logger;
 

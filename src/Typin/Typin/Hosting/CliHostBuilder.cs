@@ -5,11 +5,15 @@
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using Microsoft.Extensions.Hosting;
     using Typin.Console;
+    using Typin.Exceptions;
+    using Typin.Help;
     using Typin.Hosting.Extensions;
     using Typin.Hosting.Startup;
     using Typin.Input;
     using Typin.Internal;
     using Typin.Internal.Input;
+    using Typin.Middlewares;
+    using Typin.OptionFallback;
 
     internal class CliHostBuilder : ICliHostBuilder
     {
@@ -42,9 +46,14 @@
                 services.AddSingleton<CliApplication>();
                 services.AddSingleton<IRootSchemaAccessor, RootSchemaAccessor>();
                 services.AddSingleton<ICliCommandExecutor, CliCommandExecutor>();
+                services.AddSingleton<MiddlewarePipelineProvider>();
                 services.AddSingleton<ICliApplicationLifetime, CliApplicationLifetime>();
 
                 services.TryAddSingleton<IApplicationBuilderFactory, ApplicationBuilderFactory>();
+
+                services.TryAddSingleton<IOptionFallbackProvider, EnvironmentVariableFallbackProvider>();
+                services.TryAddScoped<ICliExceptionHandler, DefaultExceptionHandler>();
+                services.TryAddScoped<IHelpWriter, DefaultHelpWriter>();
 
                 services.AddScoped(typeof(ICliContext), (provider) =>
                 {

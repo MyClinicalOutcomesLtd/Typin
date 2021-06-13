@@ -1,10 +1,13 @@
-﻿namespace Typin.Internal.Pipeline
+﻿namespace Typin.Middlewares
 {
     using System.Threading;
     using System.Threading.Tasks;
     using Typin;
 
-    internal sealed class ExecuteCommand : IMiddleware
+    /// <summary>
+    /// Executes a command.
+    /// </summary>
+    public sealed class ExecuteCommand : IMiddleware
     {
         public async Task HandleAsync(ICliContext context, CommandPipelineHandlerDelegate next, CancellationToken cancellationToken)
         {

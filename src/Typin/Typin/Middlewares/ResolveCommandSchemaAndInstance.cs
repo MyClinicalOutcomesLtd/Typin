@@ -1,4 +1,4 @@
-﻿namespace Typin.Internal.Pipeline
+﻿namespace Typin.Middlewares
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,10 @@
     using Typin.Internal;
     using Typin.Schemas;
 
-    internal sealed class ResolveCommandSchemaAndInstance : IMiddleware
+    /// <summary>
+    /// Resolves command schema and instance.
+    /// </summary>
+    public sealed class ResolveCommandSchemaAndInstance : IMiddleware
     {
         private readonly IServiceProvider _serviceProvider;
         //private readonly ICliApplicationLifetime _applicationLifetime;

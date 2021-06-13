@@ -1,4 +1,4 @@
-﻿namespace Typin.Internal.Pipeline
+﻿namespace Typin.Middlewares
 {
     using System;
     using System.Threading;
@@ -10,7 +10,10 @@
     using Typin.OptionFallback;
     using Typin.Schemas;
 
-    internal sealed class BindInput : IMiddleware
+    /// <summary>
+    /// Binds input.
+    /// </summary>
+    public sealed class BindInput : IMiddleware
     {
         private readonly IOptionFallbackProvider _optionFallbackProvider;
         private readonly ICliApplicationLifetime _applicationLifetime;
@@ -22,6 +25,7 @@
             _optionFallbackProvider = optionFallbackProvider;
         }
 
+        /// <inheritdoc/>
         public async Task HandleAsync(ICliContext context, CommandPipelineHandlerDelegate next, CancellationToken cancellationToken)
         {
             //Get input and command schema from context

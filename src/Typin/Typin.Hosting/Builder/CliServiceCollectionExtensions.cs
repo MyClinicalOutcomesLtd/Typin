@@ -2,7 +2,6 @@
 {
     using System;
     using Microsoft.Extensions.DependencyInjection;
-    using Typin.Hosting;
 
     /// <summary>
     /// Cli service collection extensions.
@@ -23,7 +22,6 @@
             ApplicationConfiguration configuration = new(cliComponentsCollection.Modes,
                                                          cliComponentsCollection.Commands,
                                                          cliComponentsCollection.Directives,
-                                                         null!,
                                                          cliComponentsCollection.StartupMode!);
 
             services.AddSingleton(configuration);

@@ -44,8 +44,6 @@
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-            RequestDelegate? application = null;
-
             try
             {
                 var configure = _options.ConfigureApplication;
@@ -65,7 +63,7 @@
                 configure(builder);
 
                 // Build the request pipeline
-                application = builder.Build();
+                builder.Build();
             }
             catch (Exception ex)
             {

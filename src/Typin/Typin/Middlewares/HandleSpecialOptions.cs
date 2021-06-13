@@ -1,13 +1,17 @@
-﻿namespace Typin.Internal.Pipeline
+﻿namespace Typin.Middlewares
 {
     using System.Threading;
     using System.Threading.Tasks;
     using Typin;
     using Typin.Help;
     using Typin.Input;
+    using Typin.Internal;
     using Typin.Schemas;
 
-    internal sealed class HandleSpecialOptions : IMiddleware
+    /// <summary>
+    /// Handles special options.
+    /// </summary>
+    public sealed class HandleSpecialOptions : IMiddleware
     {
         private readonly IHelpWriter _helpTextWriter;
 
@@ -32,8 +36,8 @@
             }
 
             // Help option
-            if ((commandSchema.IsHelpOptionAvailable && input.IsHelpOptionSpecified) ||
-                (commandSchema == StubDefaultCommand.Schema && input.IsDefaultCommandOrEmpty))
+            if (commandSchema.IsHelpOptionAvailable && input.IsHelpOptionSpecified ||
+                commandSchema == StubDefaultCommand.Schema && input.IsDefaultCommandOrEmpty)
             {
                 _helpTextWriter.Write(commandSchema, context.CommandDefaultValues);
 

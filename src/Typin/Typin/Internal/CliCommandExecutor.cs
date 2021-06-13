@@ -11,20 +11,24 @@
     using Typin.Input;
     using Typin.Internal.Extensions;
     using Typin.Internal.Input;
+    using Typin.Middlewares;
     using Typin.Utilities;
 
     internal sealed class CliCommandExecutor : ICliCommandExecutor
     {
         private readonly IServiceScopeFactory _serviceScopeFactory;
         private readonly IRootSchemaAccessor _rootSchemaAccessor;
+        private readonly MiddlewarePipelineProvider _middlewarePipelineProvider;
         private readonly ILogger _logger;
 
         public CliCommandExecutor(IServiceScopeFactory serviceScopeFactory,
                                   IRootSchemaAccessor rootSchemaAccessor,
+                                  MiddlewarePipelineProvider middlewarePipelineProvider,
                                   ILogger<CliCommandExecutor> logger)
         {
             _serviceScopeFactory = serviceScopeFactory;
             _rootSchemaAccessor = rootSchemaAccessor;
+            _middlewarePipelineProvider = middlewarePipelineProvider;
             _logger = logger;
         }
 
@@ -89,7 +93,7 @@
 
         private async Task RunPipelineAsync(IServiceProvider serviceProvider, ICliContext context)
         {
-            IReadOnlyCollection<Type> middlewareTypes = context.Configuration.MiddlewareTypes;
+            IReadOnlyCollection<Type> middlewareTypes = _middlewarePipelineProvider.Middlewares;
 
             CancellationToken cancellationToken = context.Console.GetCancellationToken();
             CommandPipelineHandlerDelegate next = IMiddlewareExtensions.PipelineTermination;

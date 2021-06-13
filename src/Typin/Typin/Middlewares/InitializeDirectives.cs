@@ -1,4 +1,4 @@
-﻿namespace Typin.Internal.Pipeline
+﻿namespace Typin.Middlewares
 {
     using System;
     using System.Collections.Generic;
@@ -10,7 +10,10 @@
     using Typin.Internal.Exceptions;
     using Typin.Schemas;
 
-    internal sealed class InitializeDirectives : IMiddleware
+    /// <summary>
+    /// Initializes directives.
+    /// </summary>
+    public sealed class InitializeDirectives : IMiddleware
     {
         private readonly IServiceProvider _serviceProvider;
         private readonly ICliApplicationLifetime _applicationLifetime;

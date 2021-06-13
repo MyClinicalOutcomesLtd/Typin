@@ -23,10 +23,10 @@
         /// </summary>
         public IReadOnlyList<Type> DirectiveTypes { get; }
 
-        /// <summary>
-        /// Collection of middlewares in application.
-        /// </summary>
-        public IReadOnlyCollection<Type> MiddlewareTypes { get; }
+        ///// <summary>
+        ///// Collection of middlewares in application.
+        ///// </summary>
+        //public IReadOnlyCollection<Type> MiddlewareTypes { get; }
 
         /// <summary>
         /// Startup mode type.
@@ -39,13 +39,11 @@
         public ApplicationConfiguration(IReadOnlyList<Type> modeTypes,
                                         IReadOnlyList<Type> commandTypes,
                                         IReadOnlyList<Type> customDirectives,
-                                        LinkedList<Type> middlewareTypes,
                                         Type startupMode)
         {
             ModeTypes = modeTypes;
             CommandTypes = commandTypes;
             DirectiveTypes = customDirectives;
-            MiddlewareTypes = middlewareTypes;
             StartupMode = startupMode;
         }
     }
