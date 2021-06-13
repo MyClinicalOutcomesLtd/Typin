@@ -1,4 +1,4 @@
-﻿namespace Typin.Modes
+﻿namespace Typin.Modes.Direct
 {
     using Typin.Hosting.Builder;
 

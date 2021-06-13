@@ -6,9 +6,9 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
-    using Typin.Console;
+    using Typin.Consoles;
     using Typin.Internal.Extensions;
-    using Typin.Modes;
+    using Typin.Modes.Direct;
     using Typin.Schemas;
     using Typin.Utilities;
 

@@ -1,11 +1,11 @@
-﻿namespace Typin.Modes
+﻿namespace Typin.Modes.Interactive
 {
     using System;
     using Microsoft.Extensions.DependencyInjection;
-    using Typin.Commands;
-    using Typin.Directives;
     using Typin.Hosting.Builder;
     using Typin.Hosting.Extensions;
+    using Typin.Modes.Interactive.Commands;
+    using Typin.Modes.Interactive.Directives;
 
     /// <summary>
     /// <see cref="ICliComponentsCollection"/> interactive mode configuration extensions.
@@ -25,7 +25,7 @@
 
             cli.RegisterMode<InteractiveMode>(asStartup);
 
-            options ??= (InteractiveModeOptions cfg) => { };
+            options ??= (cfg) => { };
             cli.Services.Configure(options);
             cli.Services.AddInputProvider<IInteractiveInputProvider, InteractiveInputProvider>();
 

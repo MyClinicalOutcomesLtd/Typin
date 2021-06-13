@@ -1,10 +1,10 @@
-﻿namespace Typin.AutoCompletion
+﻿namespace Typin.Modes.Interactive.AutoCompletion
 {
     using System;
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
-    using Typin.Console;
+    using Typin.Consoles;
 
     internal class AutoCompleteInput
     {

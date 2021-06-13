@@ -18,12 +18,16 @@
         private readonly IServiceProvider _serviceProvider;
         //private readonly ICliApplicationLifetime _applicationLifetime;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="ResolveCommandSchemaAndInstance"/>.
+        /// </summary>
         public ResolveCommandSchemaAndInstance(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
             //_applicationLifetime = applicationLifetime;
         }
 
+        /// <inheritdoc/>
         public async Task HandleAsync(ICliContext context, CommandPipelineHandlerDelegate next, CancellationToken cancellationToken)
         {
             context.ExitCode ??= Execute((CliContext)context);

@@ -1,4 +1,4 @@
-﻿namespace Typin.Modes
+﻿namespace Typin.Modes.Interactive
 {
     using System;
     using System.Collections.Generic;
@@ -6,8 +6,9 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Options;
-    using Typin.AutoCompletion;
-    using Typin.Console;
+    using Typin;
+    using Typin.Consoles;
+    using Typin.Modes.Interactive.AutoCompletion;
     using Typin.Utilities;
 
     /// <summary>

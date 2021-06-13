@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Linq.Expressions;
-    using Typin.Console;
-    using Typin.Console.IO;
+    using Typin.Consoles;
+    using Typin.Consoles.IO;
     using Typin.Extensions;
 
     /// <summary>

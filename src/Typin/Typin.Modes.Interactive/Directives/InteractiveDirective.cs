@@ -1,10 +1,10 @@
-﻿namespace Typin.Directives
+﻿namespace Typin.Modes.Interactive.Directives
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Typin;
     using Typin.Attributes;
-    using Typin.Modes;
-    using Typin.Modes.Interactive.Directives;
+    using Typin.Modes.Interactive;
 
     /// <summary>
     /// If application runs in interactive mode (using the interactive command or [interactive] directive), it is possible to execute multiple commands in one processes.

@@ -1,12 +1,12 @@
-﻿namespace Typin.Directives
+﻿namespace Typin.Modes.Interactive.Directives
 {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Options;
+    using Typin;
     using Typin.Attributes;
-    using Typin.Modes;
-    using Typin.Modes.Interactive.Directives;
+    using Typin.Modes.Interactive;
 
     /// <summary>
     /// If application runs in interactive mode, this [.] directive can be used to remove one command from the scope.

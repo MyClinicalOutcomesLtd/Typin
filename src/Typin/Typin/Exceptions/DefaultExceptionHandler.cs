@@ -1,7 +1,7 @@
 namespace Typin.Exceptions
 {
     using System;
-    using Typin.Console;
+    using Typin.Consoles;
     using Typin.Help;
 
     /// <summary>

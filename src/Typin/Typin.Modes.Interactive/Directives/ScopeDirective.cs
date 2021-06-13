@@ -1,14 +1,15 @@
-﻿namespace Typin.Directives
+﻿namespace Typin.Modes.Interactive.Directives
 {
     using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
     using Microsoft.Extensions.Options;
+    using Typin;
     using Typin.Attributes;
     using Typin.Input;
     using Typin.Internal.Extensions;
-    using Typin.Modes;
-    using Typin.Modes.Interactive.Directives;
+    using Typin.Modes.Interactive;
+    using Typin.Modes.Interactive.Internal.Extensions;
 
     /// <summary>
     /// If application runs in interactive mode, [>] directive followed by command(s) would scope to the command(s), allowing to ommit specified command name(s).

@@ -3,7 +3,6 @@
     using System;
     using Microsoft.Extensions.DependencyInjection;
     using Typin.Help;
-    using Typin.Hosting;
 
     /// <summary>
     /// <see cref="ICliComponentsCollection"/> exceptions releated extensions.

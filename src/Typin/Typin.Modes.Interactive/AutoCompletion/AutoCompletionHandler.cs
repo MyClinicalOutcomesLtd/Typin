@@ -1,7 +1,8 @@
-﻿namespace Typin.AutoCompletion
+﻿namespace Typin.Modes.Interactive.AutoCompletion
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using Typin;
 
     /// <summary>
     /// Default auto completion handler.

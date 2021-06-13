@@ -2,8 +2,8 @@
 {
     using System;
     using System.IO;
-    using Typin.Console;
-    using Typin.Console.IO;
+    using Typin.Consoles;
+    using Typin.Consoles.IO;
     using Typin.Internal.StackTrace;
 
     /// <summary>

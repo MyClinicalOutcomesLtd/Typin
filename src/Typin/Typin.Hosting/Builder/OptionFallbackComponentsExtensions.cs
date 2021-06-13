@@ -2,7 +2,6 @@
 {
     using System;
     using Microsoft.Extensions.DependencyInjection;
-    using Typin.Hosting;
     using Typin.OptionFallback;
 
     /// <summary>

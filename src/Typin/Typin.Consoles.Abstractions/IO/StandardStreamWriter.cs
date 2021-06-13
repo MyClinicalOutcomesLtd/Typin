@@ -1,4 +1,4 @@
-﻿namespace Typin.Console.IO
+﻿namespace Typin.Consoles.IO
 {
     using System.Diagnostics.CodeAnalysis;
     using System.IO;

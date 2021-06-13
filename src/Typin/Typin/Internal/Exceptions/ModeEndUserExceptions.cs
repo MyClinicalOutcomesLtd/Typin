@@ -2,8 +2,8 @@
 {
     using System;
     using System.Text;
-    using Typin.AutoCompletion;
     using Typin.Exceptions;
+    using Typin.Modes.Interactive.AutoCompletion;
     using Typin.Schemas;
 
     /// <summary>

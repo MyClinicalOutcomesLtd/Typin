@@ -1,9 +1,9 @@
-﻿namespace Typin.Console
+﻿namespace Typin.Consoles
 {
     using System;
     using System.Threading;
     using System.Threading.Tasks;
-    using Typin.Console.IO;
+    using Typin.Consoles.IO;
 
     /// <summary>
     /// Abstraction for interacting with the console.

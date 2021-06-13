@@ -1,8 +1,7 @@
-﻿namespace Typin.Utilities
+﻿namespace Typin.Consoles.Virtual
 {
     using System.IO;
     using System.Text;
-    using Typin.Console;
 
     /// <summary>
     /// Wrapper over a <see cref="MemoryStream"/> for <see cref="VirtualConsole"/>.

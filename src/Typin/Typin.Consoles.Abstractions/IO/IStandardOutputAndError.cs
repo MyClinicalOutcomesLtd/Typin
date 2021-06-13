@@ -1,4 +1,4 @@
-﻿namespace Typin.Console.IO
+﻿namespace Typin.Consoles.IO
 {
     /// <summary>
     /// Abstraction for interacting with the standard output stream (stdout) and error stream (stderr).

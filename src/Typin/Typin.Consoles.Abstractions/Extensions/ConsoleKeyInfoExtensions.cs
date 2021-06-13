@@ -1,4 +1,4 @@
-﻿namespace Typin.Extensions
+﻿namespace Typin.Consoles.Extensions
 {
     using System;
 

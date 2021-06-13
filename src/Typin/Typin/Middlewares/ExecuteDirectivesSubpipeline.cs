@@ -16,11 +16,15 @@
     {
         private readonly ILogger _logger;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="ExecuteDirectivesSubpipeline"/>.
+        /// </summary>
         public ExecuteDirectivesSubpipeline(ILogger<ExecuteDirectivesSubpipeline> logger)
         {
             _logger = logger;
         }
 
+        /// <inheritdoc/>
         public async Task HandleAsync(ICliContext context, CommandPipelineHandlerDelegate next, CancellationToken cancellationToken)
         {
             IReadOnlyList<IPipelinedDirective> pipelinedDirectives = context.PipelinedDirectives;

@@ -4,7 +4,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.DependencyInjection.Extensions;
     using Microsoft.Extensions.Hosting;
-    using Typin.Console;
+    using Typin.Consoles;
     using Typin.Exceptions;
     using Typin.Help;
     using Typin.Hosting.Extensions;

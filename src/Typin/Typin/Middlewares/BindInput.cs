@@ -18,6 +18,9 @@
         private readonly IOptionFallbackProvider _optionFallbackProvider;
         private readonly ICliApplicationLifetime _applicationLifetime;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="BindInput"/>.
+        /// </summary>
         public BindInput(IOptionFallbackProvider optionFallbackProvider,
                          ICliApplicationLifetime applicationLifetime)
         {

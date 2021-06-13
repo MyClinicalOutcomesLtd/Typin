@@ -1,9 +1,9 @@
-﻿namespace Typin.Directives
+﻿namespace Typin.Modes.Interactive.Directives
 {
     using System.Threading;
     using System.Threading.Tasks;
+    using Typin;
     using Typin.Attributes;
-    using Typin.Modes.Interactive.Directives;
 
     /// <summary>
     /// Normally when application runs in interactive mode, an empty line does nothing; but [!] will override this behaviour, executing a root or scoped command.

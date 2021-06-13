@@ -1,8 +1,7 @@
 ﻿namespace Typin.Hosting.Builder
 {
     using Microsoft.Extensions.DependencyInjection;
-    using Typin.Console;
-    using Typin.Hosting;
+    using Typin.Consoles;
 
     /// <summary>
     /// <see cref="ICliComponentsCollection"/> console releated extensions.

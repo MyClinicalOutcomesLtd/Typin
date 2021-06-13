@@ -1,13 +1,13 @@
-﻿namespace Typin.Console
+﻿namespace Typin.Consoles.Virtual
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
-    using Typin.Console.IO;
-    using Typin.Extensions;
-    using Typin.Utilities;
+    using Typin.Consoles;
+    using Typin.Consoles.Extensions;
+    using Typin.Consoles.IO;
 
     /// <summary>
     /// Implementation of <see cref="IConsole"/> that routes all data to preconfigured streams.

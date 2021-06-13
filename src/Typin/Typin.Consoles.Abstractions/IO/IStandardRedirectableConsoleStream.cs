@@ -1,4 +1,4 @@
-﻿namespace Typin.Console.IO
+﻿namespace Typin.Consoles.IO
 {
     /// <summary>
     /// Abstraction for standard stream redirtection state.

@@ -1,13 +1,13 @@
-﻿namespace Typin.AutoCompletion
+﻿namespace Typin.Modes.Interactive.AutoCompletion
 {
     using System;
     using System.Collections.Generic;
     using System.Text;
     using System.Threading;
     using System.Threading.Tasks;
-    using Typin.Console;
-    using Typin.Internal.Exceptions;
-    using static Typin.AutoCompletion.KeyHandler;
+    using Typin.Consoles;
+    using Typin.Modes.Interactive.Internal.Exceptions;
+    using static Typin.Modes.Interactive.AutoCompletion.KeyHandler;
 
     internal sealed class LineInputHandler
     {

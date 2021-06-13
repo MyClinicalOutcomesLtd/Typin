@@ -1,12 +1,13 @@
-﻿namespace Typin.Console
+﻿namespace Typin.Consoles.System
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.IO;
-    using System.Threading;
-    using System.Threading.Tasks;
-    using Typin.Console.IO;
-    using Typin.Extensions;
+    using global::System;
+    using global::System.Diagnostics.CodeAnalysis;
+    using global::System.IO;
+    using global::System.Threading;
+    using global::System.Threading.Tasks;
+    using Typin.Consoles;
+    using Typin.Consoles.Extensions;
+    using Typin.Consoles.IO;
 
     /// <summary>
     /// Implementation of <see cref="IConsole"/> that wraps the default system console.
@@ -227,7 +228,7 @@
 
                 Output.Write(charsRead[0]);
 
-                return (charsRead[0]).ToConsoleKeyInfo();
+                return charsRead[0].ToConsoleKeyInfo();
             }
 
             while (!Console.KeyAvailable && !cancellationToken.IsCancellationRequested)

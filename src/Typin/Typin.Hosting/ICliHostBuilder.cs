@@ -24,7 +24,6 @@
         /// <summary>
         /// Configures command line application using a startup class.
         /// </summary>
-        /// <param name="configure"></param>
         /// <returns></returns>
         ICliHostBuilder UseStartup<TStartup>()
             where TStartup : notnull, IStartup, new();

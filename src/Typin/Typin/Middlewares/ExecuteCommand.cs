@@ -9,6 +9,7 @@
     /// </summary>
     public sealed class ExecuteCommand : IMiddleware
     {
+        /// <inheritdoc/>
         public async Task HandleAsync(ICliContext context, CommandPipelineHandlerDelegate next, CancellationToken cancellationToken)
         {
             // Get command instance from context

@@ -6,7 +6,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Typin.Attributes;
-    using Typin.Console;
+    using Typin.Consoles;
 
     /// <summary>
     /// When application runs in debug mode (using the [debug] directive), it will wait for debugger to be attached before proceeding.

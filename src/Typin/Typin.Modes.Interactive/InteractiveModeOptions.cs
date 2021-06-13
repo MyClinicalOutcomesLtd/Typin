@@ -1,9 +1,10 @@
-﻿namespace Typin.Modes
+﻿namespace Typin.Modes.Interactive
 {
     using System;
     using System.Collections.Generic;
-    using Typin.AutoCompletion;
-    using Typin.Console;
+    using Typin;
+    using Typin.Consoles;
+    using Typin.Modes.Interactive.AutoCompletion;
 
     /// <summary>
     /// Interactive mode options.

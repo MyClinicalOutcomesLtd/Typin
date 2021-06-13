@@ -1,4 +1,4 @@
-﻿namespace Typin.AutoCompletion
+﻿namespace Typin.Modes.Interactive.AutoCompletion
 {
     using System;
 
@@ -92,7 +92,7 @@
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            return ((int)Key << 16) | (int)Modifiers;
+            return (int)Key << 16 | (int)Modifiers;
         }
 
         /// <inheritdoc/>

@@ -6,7 +6,7 @@ namespace Typin
     using System.Threading.Tasks;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Logging;
-    using Typin.Console;
+    using Typin.Consoles;
     using Typin.Exceptions;
     using Typin.Schemas;
     using Typin.Utilities;

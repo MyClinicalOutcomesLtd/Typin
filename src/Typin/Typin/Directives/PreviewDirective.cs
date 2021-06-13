@@ -5,7 +5,7 @@
     using System.Threading;
     using System.Threading.Tasks;
     using Typin.Attributes;
-    using Typin.Console;
+    using Typin.Consoles;
     using Typin.Input;
 
     /// <summary>

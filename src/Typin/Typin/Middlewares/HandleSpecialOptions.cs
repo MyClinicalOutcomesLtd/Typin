@@ -15,11 +15,15 @@
     {
         private readonly IHelpWriter _helpTextWriter;
 
+        /// <summary>
+        /// Initializes a new instance of <see cref="HandleSpecialOptions"/>.
+        /// </summary>
         public HandleSpecialOptions(IHelpWriter helpTextWriter)
         {
             _helpTextWriter = helpTextWriter;
         }
 
+        /// <inheritdoc/>
         public async Task HandleAsync(ICliContext context, CommandPipelineHandlerDelegate next, CancellationToken cancellationToken)
         {
             // Get input and command schema from context

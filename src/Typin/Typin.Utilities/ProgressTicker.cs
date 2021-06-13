@@ -1,7 +1,7 @@
 ﻿namespace Typin.Utilities
 {
     using System;
-    using Typin.Console;
+    using Typin.Consoles;
 
     /// <summary>
     /// Utility for rendering current progress to the console that erases and rewrites output on every tick.

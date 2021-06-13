@@ -1,8 +1,9 @@
-﻿namespace Typin.Modes
+﻿namespace Typin.Modes.Direct
 {
     using System.Collections.Generic;
     using System.Threading;
     using System.Threading.Tasks;
+    using Typin;
     using Typin.Input;
 
     /// <summary>

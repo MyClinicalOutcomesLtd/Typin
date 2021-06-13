@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Typin.Console;
+    using Typin.Consoles;
     using Typin.Input;
     using Typin.Schemas;
 

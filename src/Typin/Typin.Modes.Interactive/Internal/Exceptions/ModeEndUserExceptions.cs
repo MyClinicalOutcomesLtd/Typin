@@ -1,9 +1,9 @@
-﻿namespace Typin.Internal.Exceptions
+﻿namespace Typin.Modes.Interactive.Internal.Exceptions
 {
     using System;
     using System.Text;
-    using Typin.AutoCompletion;
     using Typin.Exceptions;
+    using Typin.Modes.Interactive.AutoCompletion;
     using Typin.Schemas;
 
     /// <summary>

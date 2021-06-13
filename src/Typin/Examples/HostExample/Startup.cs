@@ -3,12 +3,12 @@
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Typin;
-    using Typin.Console;
+    using Typin.Consoles.System;
     using Typin.Hosting;
     using Typin.Hosting.Builder;
     using Typin.Hosting.Startup;
     using Typin.Middlewares;
-    using Typin.Modes;
+    using Typin.Modes.Interactive;
 
     public class Startup : IStartup
     {

@@ -2,7 +2,7 @@
 {
     using System.Threading;
     using System.Threading.Tasks;
-    using Typin.Console;
+    using Typin.Consoles;
 
     /// <summary>
     /// Directive handler.

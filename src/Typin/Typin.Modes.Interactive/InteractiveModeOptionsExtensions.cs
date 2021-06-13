@@ -1,8 +1,8 @@
-﻿namespace Typin.Modes
+﻿namespace Typin.Modes.Interactive
 {
     using System;
     using Microsoft.Extensions.DependencyInjection;
-    using Typin.Console;
+    using Typin.Consoles;
 
     /// <summary>
     /// <see cref="InteractiveModeOptions"/> extensions.

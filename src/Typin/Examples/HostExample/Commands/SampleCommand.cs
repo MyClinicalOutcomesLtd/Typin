@@ -5,7 +5,7 @@
     using System.Threading.Tasks;
     using Typin;
     using Typin.Attributes;
-    using Typin.Console;
+    using Typin.Consoles;
 
     [Command]
     public class SampleCommand : ICommand

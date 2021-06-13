@@ -15,7 +15,6 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <RootNamespace>Typin</RootNamespace>
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
@@ -61,13 +60,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Typin.Consoles.Abstractions\Typin.Consoles.Abstractions.csproj" />
-    <ProjectReference Include="..\Typin.Consoles.System\Typin.Consoles.System.csproj" />
-    <ProjectReference Include="..\Typin.Consoles.Virtual\Typin.Consoles.Virtual.csproj" />
-    <ProjectReference Include="..\Typin.Core\Typin.Core.csproj" />
-    <ProjectReference Include="..\Typin.Hosting\Typin.Hosting.csproj" />
-    <ProjectReference Include="..\Typin.Modes.Direct\Typin.Modes.Direct.csproj" />
-    <ProjectReference Include="..\Typin.Modes.Interactive\Typin.Modes.Interactive.csproj" />
-    <ProjectReference Include="..\Typin.Utilities\Typin.Utilities.csproj" />
   </ItemGroup>
 
 </Project>

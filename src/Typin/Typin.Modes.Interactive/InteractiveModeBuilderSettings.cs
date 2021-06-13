@@ -1,4 +1,4 @@
-﻿namespace Typin.Modes
+﻿namespace Typin.Modes.Interactive
 {
     /// <summary>
     /// Interactive mode applicaiton buiilder extension settings.

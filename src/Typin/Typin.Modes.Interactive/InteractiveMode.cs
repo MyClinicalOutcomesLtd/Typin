@@ -1,4 +1,4 @@
-﻿namespace Typin.Modes
+﻿namespace Typin.Modes.Interactive
 {
     using System;
     using System.Collections.Generic;
@@ -8,9 +8,9 @@
     using Microsoft.Extensions.Logging;
     using Microsoft.Extensions.Options;
     using Typin;
-    using Typin.AutoCompletion;
-    using Typin.Console;
+    using Typin.Consoles;
     using Typin.Input;
+    using Typin.Modes.Interactive.AutoCompletion;
 
     /// <summary>
     /// Interactive CLI mode.

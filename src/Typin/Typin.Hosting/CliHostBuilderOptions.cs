@@ -1,8 +1,6 @@
 ﻿namespace Typin.Hosting
 {
-    using System;
     using System.Collections.Generic;
-    using Microsoft.Extensions.Hosting;
 
     /// <summary>
     /// Builder options for use with <see cref="HostBuilderExtensions.ConfigureCliHost(IHostBuilder, Action{ICliHostBuilder}, Action{CliHostBuilderOptions})"/>.

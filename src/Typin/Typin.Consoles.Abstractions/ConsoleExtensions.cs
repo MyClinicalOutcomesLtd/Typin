@@ -1,7 +1,7 @@
-﻿namespace Typin.Console
+﻿namespace Typin.Consoles
 {
     using System;
-    using Typin.Console.IO;
+    using Typin.Consoles.IO;
 
     /// <summary>
     /// Extensions for <see cref="IConsole"/>.
