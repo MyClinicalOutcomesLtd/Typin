@@ -49,6 +49,7 @@ namespace Typin
 
         //Middleware
         private readonly LinkedList<Type> _middlewareTypes = new();
+        private readonly LinkedList<Type> _earlyMiddlewareTypes = new();
 
         /// <summary>
         /// Initializes an instance of <see cref="CliApplicationBuilder"/>.
@@ -376,7 +377,7 @@ namespace Typin
 
         #region Middleware
         /// <summary>
-        /// Adds a middleware to the command execution pipeline.
+        /// Adds a middleware to the command execution pipeline for execution after the command is instantiated
         /// Middlewares are also registered as scoped services and are executed in registration order.
         /// </summary>
         public CliApplicationBuilder UseMiddleware(Type middleware)
@@ -393,7 +394,33 @@ namespace Typin
         }
 
         /// <summary>
-        /// Adds a middleware to the command execution pipeline.
+        /// Adds a middleware to the command execution pipeline for execution before the command is instantiated.
+        /// Middlewares are also registered as scoped services and are executed in registration order.
+        /// </summary>
+        public CliApplicationBuilder UseConfigurationMiddleware(Type middleware)
+        {
+            _configureServicesActions.Add(services =>
+            {
+                services.AddScoped(typeof(IMiddleware), middleware);
+                services.AddScoped(middleware);
+            });
+
+            _earlyMiddlewareTypes.AddLast(middleware);
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a middleware to the command execution pipeline for execution before the command is instantiated.
+        /// </summary>
+        public CliApplicationBuilder UseConfigurationMiddleware<TMiddleware>()
+            where TMiddleware : class, IMiddleware
+        {
+            return UseConfigurationMiddleware(typeof(TMiddleware));
+        }
+
+        /// <summary>
+        /// Adds a middleware to the command execution pipeline for execution atfer the command is instantiated.
         /// </summary>
         public CliApplicationBuilder UseMiddleware<TMiddleware>()
             where TMiddleware : class, IMiddleware
@@ -553,11 +580,13 @@ namespace Typin
             // Create context
             ServiceCollection _serviceCollection = new();
 
+            var allMiddleware = new LinkedList<Type>(_earlyMiddlewareTypes.Concat(_middlewareTypes));
+
             ApplicationMetadata metadata = new(_title, _executableName, _versionText, _description);
             ApplicationConfiguration configuration = new(_modeTypes,
                                                          _commandTypes,
                                                          _directivesTypes,
-                                                         _middlewareTypes,
+                                                         allMiddleware,
                                                          _startupMode!,
                                                          _serviceCollection);
 
