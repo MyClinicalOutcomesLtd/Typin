@@ -29,6 +29,11 @@ jobs:
       #     name: package
       #     path: "src/Typin/Typin/bin/Release/*.nupkg"
 
+      - name: Setup Nuget
+        run: dotnet nuget add source https://nuget.pkg.github.com/MyClinicalOutcomesLtd/index.json -n github
+        env:
+          NUGET_AUTH_TOKEN: ${{ github.token }}
+          
       - name: Publish
         run: dotnet nuget push "src/Typin/Typin/bin/Release/*.nupkg" --source github
         env:
