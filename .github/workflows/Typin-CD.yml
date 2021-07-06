@@ -3,28 +3,53 @@ name: Typin-CD
 on:
   push:
     tags:
-    - 'Typin-[0-9]+.[0-9]+.[0-9]+'
-    - 'Typin-[0-9]+.[0-9]+.[0-9]+-dev-[0-9]+'
-    - 'Typin-[0-9]+.[0-9]+.[0-9]+-rc[0-9]+'
+      - "Typin-[0-9]+.[0-9]+.[0-9]+"
+      - "Typin-[0-9]+.[0-9]+.[0-9]+-dev-[0-9]+"
+      - "Typin-[0-9]+.[0-9]+.[0-9]+-rc[0-9]+"
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2.3.3
+      - name: Checkout
+        uses: actions/checkout@v2.3.3
 
-    - name: Install .NET
-      uses: actions/setup-dotnet@v1.7.2
-      with:
-        dotnet-version: 5.0.201
+      - name: Install .NET
+        uses: actions/setup-dotnet@v1.7.2
+        with:
+          dotnet-version: 5.0.201
 
-    - name: Pack
-      run: dotnet pack src/Typin/Typin.sln --configuration Release-CD
+      - name: Pack
+        run: dotnet pack src/Typin/Typin.sln --configuration Release-CD
 
-    - name: Deploy
-      run: dotnet nuget push src/Typin/Typin/bin/Release/*.nupkg -s nuget.org -k ${{ secrets.NUGET_TOKEN }}
+      # - name: Upload
+      #   uses: actions/upload-artifact@v2
+      #   with:
+      #     name: package
+      #     path: "src/Typin/Typin/bin/Release/*.nupkg"
 
-    - name: Deploy
-      run: dotnet nuget push src/Typin/Typin.Core/bin/Release/*.nupkg -s nuget.org -k ${{ secrets.NUGET_TOKEN }}
+      - name: Publish
+        run: dotnet nuget push "src/Typin/Typin/bin/Release/*.nupkg" --source github
+        env:
+          NUGET_AUTH_TOKEN: ${{ github.token }}
+
+  # publish:
+  #   name: "Publish to GitHub Packages"
+
+  #   needs: [package]
+
+  #   runs-on: ubuntu-18.04
+
+  #   if: github.repository_owner == 'MyClinicalOutcomesLtd'
+
+  #   steps:
+  #     - name: Upload
+  #       uses: actions/download-artifact@v2
+  #       with:
+  #         name: package
+  #     - name: PushGithub
+  #       # run: nuget.exe push "**/*.nupkg" -NoSymbols -SkipDuplicate
+  #       run: dotnet nuget push "**/*.nupkg" --source github
+  #       env:
+  #         NUGET_AUTH_TOKEN: ${{ github.token }}

@@ -43,8 +43,8 @@ jobs:
     - name: Build & test
       run: dotnet test src/Typin/Typin.sln --configuration Release-CI
 
-    - name: Upload coverage
-      uses: codecov/codecov-action@v1.0.14
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        files: ./src/Typin/Typin.Tests/bin/Release/Coverage.xml
+    # - name: Upload coverage
+    #   uses: codecov/codecov-action@v1.0.14
+    #   with:
+    #     token: ${{ secrets.CODECOV_TOKEN }}
+    #     files: ./src/Typin/Typin.Tests/bin/Release/Coverage.xml
