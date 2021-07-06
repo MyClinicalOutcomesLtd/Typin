@@ -24,6 +24,8 @@ jobs:
         run: dotnet pack src/Typin/Typin.sln --configuration Release-CD
 
       - name: Publish
-        run: dotnet nuget push "src/Typin/Typin/bin/Release/*.nupkg" --source https://nuget.pkg.github.com/MyClinicalOutcomesLtd/index.json -k ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          dotnet nuget push "src/Typin/Typin.Core/bin/Release/*.nupkg" --source https://nuget.pkg.github.com/MyClinicalOutcomesLtd/index.json -k ${{ secrets.GITHUB_TOKEN }}
+          dotnet nuget push "src/Typin/Typin/bin/Release/*.nupkg" --source https://nuget.pkg.github.com/MyClinicalOutcomesLtd/index.json -k ${{ secrets.GITHUB_TOKEN }}
         env:
           NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
