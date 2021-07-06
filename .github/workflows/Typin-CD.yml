@@ -3,9 +3,9 @@ name: Typin-CD
 on:
   push:
     tags:
-      - "Typin-[0-9]+.[0-9]+.[0-9]+"
-      - "Typin-[0-9]+.[0-9]+.[0-9]+-dev-[0-9]+"
-      - "Typin-[0-9]+.[0-9]+.[0-9]+-rc[0-9]+"
+      - "TypinMCO-[0-9]+.[0-9]+.[0-9]+"
+      - "TypinMCO-[0-9]+.[0-9]+.[0-9]+-dev-[0-9]+"
+      - "TypinMCO-[0-9]+.[0-9]+.[0-9]+-rc[0-9]+"
 
 jobs:
   build:
@@ -23,33 +23,7 @@ jobs:
       - name: Pack
         run: dotnet pack src/Typin/Typin.sln --configuration Release-CD
 
-      # - name: Upload
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: package
-      #     path: "src/Typin/Typin/bin/Release/*.nupkg"
-
       - name: Publish
-        run: dotnet nuget push "src/Typin/Typin/bin/Release/*.nupkg" --source github
+        run: dotnet nuget push "src/Typin/Typin/bin/Release/*.nupkg" --source https://nuget.pkg.github.com/MyClinicalOutcomesLtd/index.json -k ${{ secrets.GITHUB_TOKEN }}
         env:
-          NUGET_AUTH_TOKEN: ${{ github.token }}
-
-  # publish:
-  #   name: "Publish to GitHub Packages"
-
-  #   needs: [package]
-
-  #   runs-on: ubuntu-18.04
-
-  #   if: github.repository_owner == 'MyClinicalOutcomesLtd'
-
-  #   steps:
-  #     - name: Upload
-  #       uses: actions/download-artifact@v2
-  #       with:
-  #         name: package
-  #     - name: PushGithub
-  #       # run: nuget.exe push "**/*.nupkg" -NoSymbols -SkipDuplicate
-  #       run: dotnet nuget push "**/*.nupkg" --source github
-  #       env:
-  #         NUGET_AUTH_TOKEN: ${{ github.token }}
+          NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
